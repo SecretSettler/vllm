@@ -798,6 +798,9 @@ class ServerlessLLMLoader(BaseModelLoader):
                     f"Missing keys {tuple(state_dict)} in loaded state!")
             
         return model
+    
+    def download_model(self, model_config: ModelConfig) -> None:
+        pass
 
     @staticmethod
     def save_model(

@@ -1497,6 +1497,9 @@ def get_model_loader(load_config: LoadConfig) -> BaseModelLoader:
 
     if load_config.load_format == LoadFormat.SHARDED_STATE:
         return ShardedStateLoader(load_config)
+    
+    if load_config.load_format == LoadFormat.SERVERLESS_LLM:
+        return ServerlessLLMLoader(load_config)
 
     if load_config.load_format == LoadFormat.BITSANDBYTES:
         return BitsAndBytesModelLoader(load_config)

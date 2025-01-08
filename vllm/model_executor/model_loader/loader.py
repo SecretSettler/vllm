@@ -733,7 +733,7 @@ class ServerlessLLMLoader(BaseModelLoader):
                         continue
                     if a2 < a or b < b2 or not t.is_contiguous():
                         break  # t2 covers strictly more memory than t.
-                    if k2 < k:
+                    if k2 > k:
                         # Same tensors, keep the one with the smaller key.
                         break
                 else:

@@ -151,6 +151,15 @@ class MultiprocExecutor(Executor):
         else:
             self.failure_callback = callback
 
+    def save_serverless_llm_state(
+        self,
+        path: str,
+        pattern: Optional[str] = None,
+        max_size: Optional[int] = None,
+        ) -> None:
+        self.collective_rpc("save_serverless_llm_state",
+                            args=(path, pattern, max_size))
+
     def execute_model(
         self,
         scheduler_output,

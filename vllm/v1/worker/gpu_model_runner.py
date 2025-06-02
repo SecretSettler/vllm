@@ -1604,6 +1604,20 @@ class GPUModelRunner(LoRAModelRunnerMixin):
             tensorizer_config=tensorizer_config,
         )
 
+    def save_serverless_llm_state(
+        self,
+        path: str,
+        pattern: Optional[str] = None,
+        max_size: Optional[int] = None,
+    ) -> None:
+        from vllm.model_executor.model_loader import ServerlessLLMLoader
+        ServerlessLLMLoader.save_model(
+            self.model,
+            path,
+            pattern=pattern,
+            max_size=max_size,
+        )
+
     def _get_prompt_logprobs_dict(
         self,
         hidden_states: torch.Tensor,

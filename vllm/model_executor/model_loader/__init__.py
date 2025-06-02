@@ -16,6 +16,7 @@ from vllm.model_executor.model_loader.runai_streamer_loader import (
 from vllm.model_executor.model_loader.sharded_state_loader import (
     ShardedStateLoader)
 from vllm.model_executor.model_loader.tensorizer_loader import TensorizerLoader
+from vllm.model_executor.model_loader.sllm_loader import ServerlessLLMLoader
 from vllm.model_executor.model_loader.utils import (
     get_architecture_class_name, get_model_architecture)
 
@@ -45,6 +46,9 @@ def get_model_loader(load_config: LoadConfig) -> BaseModelLoader:
 
     if load_config.load_format == LoadFormat.RUNAI_STREAMER_SHARDED:
         return ShardedStateLoader(load_config, runai_model_streamer=True)
+
+    if load_config.load_format == LoadFormat.SERVERLESS_LLM:
+        return ServerlessLLMLoader(load_config)
 
     return DefaultModelLoader(load_config)
 

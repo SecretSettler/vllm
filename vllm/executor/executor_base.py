@@ -144,6 +144,17 @@ class ExecutorBase(ABC):
     def stop_remote_worker_execution_loop(self) -> None:
         """Releases parallel workers from model loop."""
         return
+    
+    def save_serverless_llm_state(
+        self,
+        path: str,
+        pattern: Optional[str] = None,
+        max_size: Optional[int] = None,
+        ) -> None:
+        
+        self.driver_worker.save_serverless_llm_state(
+            path=path, pattern=pattern, max_size=max_size
+        )
 
     def add_lora(self, lora_request: LoRARequest) -> bool:
         assert lora_request.lora_int_id > 0, "lora_id must be greater than 0."

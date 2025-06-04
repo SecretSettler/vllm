@@ -57,7 +57,7 @@ class ServerlessLLMLoader(BaseModelLoader):
                     result[k] = t
         return result
         
-    def load_model(self, *, vllm_config: VllmConfig) -> nn.Module:
+    def load_model(self, *, vllm_config: VllmConfig, **kwargs) -> nn.Module:
         from sllm_store.torch import load_dict
         from vllm.distributed import get_tensor_model_parallel_rank
         
@@ -117,6 +117,9 @@ class ServerlessLLMLoader(BaseModelLoader):
         return model
     
     def download_model(self, model_config: ModelConfig) -> None:
+        pass
+
+    def load_weights(self, model, model_config):
         pass
 
     @staticmethod

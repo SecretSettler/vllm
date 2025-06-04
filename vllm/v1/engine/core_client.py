@@ -258,6 +258,14 @@ class InprocClient(EngineCoreClient):
                            pattern: Optional[str] = None,
                            max_size: Optional[int] = None) -> None:
         self.engine_core.save_sharded_state(path, pattern, max_size)
+    
+    def save_serverless_llm_state(
+        self,
+        path: str,
+        pattern: Optional[str] = None,
+        max_size: Optional[int] = None,
+    ) -> None:
+        self.engine_core.save_serverless_llm_state(path, pattern, max_size)
 
     def collective_rpc(self,
                        method: Union[str, Callable[..., _R]],
@@ -678,6 +686,14 @@ class SyncMPClient(MPClient):
                            pattern: Optional[str] = None,
                            max_size: Optional[int] = None) -> None:
         self.call_utility("save_sharded_state", path, pattern, max_size)
+    
+    def save_serverless_llm_state(
+        self,
+        path: str,
+        pattern: Optional[str] = None,
+        max_size: Optional[int] = None,
+        ) -> None:
+        self.call_utility("save_serverless_llm_state", path, pattern, max_size)
 
 
 class AsyncMPClient(MPClient):
@@ -865,6 +881,15 @@ class AsyncMPClient(MPClient):
                                        pattern: Optional[str] = None,
                                        max_size: Optional[int] = None) -> None:
         await self.call_utility_async("save_sharded_state", path, pattern,
+                                      max_size)
+    
+    async def save_serverless_llm_state(
+                                        self,
+                                        path: str,
+                                        pattern: Optional[str] = None,
+                                        max_size: Optional[int] = None,
+                                        ) -> None:
+        await self.call_utility_async("save_serverless_llm_state", path, pattern, 
                                       max_size)
 
     async def collective_rpc_async(
